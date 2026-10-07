@@ -89,6 +89,19 @@
 - `manifest.webmanifest`：`name`、`short_name`、`description`、顏色。
 - `icons/`：192、512、apple-touch 180 三張，可用 PIL 畫（舊的是富士山）。
 
+## 9. `trip.json`（首頁總覽用）
+
+放在網站根目錄（GitHub Pages 發布的那個分支），首頁 `https://jerry940080.github.io/` 每次打開都會讀：
+```json
+{"v":1,"title":"熱海・伊豆・靜岡","sub":"一行副標","start":"2027-02-10","end":"2027-02-17","tentative":false,
+ "route":["TPE","NRT"],"color":"#c67139","kanji":"熱海","cover":"cover.jpg",
+ "places":[["成田",35.773,140.388],["品川",35.629,139.739],["熱海",35.095,139.074]]}
+```
+- `places`：依行程順序的主要地點（住宿城市、大景點，5–10 個就好），首頁地圖照這個順序連線。座標用 `P` 裡的值。
+- `cover`：相對於網站的圖片路徑（建議另存一張 640px 寬的 `cover.jpg`，不要指向 11 MB 的 index.html 裡的 base64）；沒有就留空，首頁用 `color`＋`kanji` 色塊。
+- `tentative:true`：日期還沒定，首頁加「日期暫定」標籤。
+- 首頁靠「repo 有 GitHub Pages＋網站上讀得到 trip.json」自動找到行程；repo 加 `trip` 標籤則網站還沒上線也會列出。
+
 ## 8. 收尾
 
 - `node scripts/check.js index.html <截圖資料夾>`：零 ✗；⚠ 落海的點逐一確認。

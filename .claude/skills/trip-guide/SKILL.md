@@ -14,6 +14,7 @@ description: 製作與維護「單一 HTML 檔」的旅遊懶人包網站（部�
 |---|---|
 | `assets/reference-guide.html` | 完整可運作的範例（照片已拿掉，0.4 MB）。**新行程就從這份複製成 `index.html`** |
 | `assets/sw.js`、`assets/manifest.webmanifest`、`assets/icons/` | 離線版（PWA）。複製到 repo 根目錄，**改快取名稱與 App 名稱** |
+| `assets/trip.json` | 給首頁 jerry940080.github.io 讀的行程摘要範例（標題、日期、地點、顏色、封面） |
 | `references/new-trip-checklist.md` | **建新行程時必讀**：範例裡每一處綁定舊行程的地方（含 grep 錨點），逐項換掉 |
 | `references/architecture.md` | 資料格式（`P／NAMES／CARDS／DAYS／STOPS／COST／BOOK／RESTO…`）與引擎函式。改任何資料前先讀 |
 | `references/features.md` | 功能清單與設計決策（桌機區塊、手機 App 五分頁、現在模式、雨備、天氣、餐廳頁…），決定要保留哪些 |
@@ -35,7 +36,9 @@ description: 製作與維護「單一 HTML 檔」的旅遊懶人包網站（部�
    靜態 HTML 區塊（hero、交通頁、美食）→ 日期常數、時區、localStorage 前綴、PWA 名稱。
    舊行程的資料整段刪掉，不要留著「之後再改」——留下的舊地名會出現在畫面上。
 4. **跑 `node scripts/check.js index.html <截圖資料夾>`**，看截圖確認地圖、時間軸、景點頁。
-5. **寫 CLAUDE.md**（專案交接文件，格式見 `references/collaboration.md`），commit、push、開 GitHub Pages。
+5. **放 `trip.json`**（網站根目錄，格式見 `references/new-trip-checklist.md` 第 9 節，範例 `assets/trip.json`）：
+   首頁 `https://jerry940080.github.io/` 靠它把這趟行程列進總覽地圖與時間軸。
+6. **寫 CLAUDE.md**（專案交接文件，格式見 `references/collaboration.md`），commit、push、開 GitHub Pages。
 
 ## 修改既有懶人包
 
@@ -45,6 +48,7 @@ description: 製作與維護「單一 HTML 檔」的旅遊懶人包網站（部�
 - 刪景點：上述全部，加上 `IMG[key]`、`DAYS[].cards`、`DAYS[].map.pts`、`RESTO`、`FOOD_TREE`。用 grep 搜 key 確認清乾淨。
 - 改座標後一定跑 `check.js`（落海檢查）。小比例尺的圖看不出 300 m 誤差，放大就很明顯。
 - 改 `sw.js` 要把版本號 `V` 加一。
+- 改了日期、主要地點或封面，**一起改 `trip.json`**（首頁每次打開都會重讀）。
 
 ## 原則
 
